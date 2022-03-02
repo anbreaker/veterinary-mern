@@ -1,3 +1,5 @@
+import { randomUUID } from 'crypto';
+
 import { generateJWT } from '../helpers/generateJWT.js';
 import { Veterinary } from '../models/Veterinary.model.js';
 
@@ -61,5 +63,66 @@ export const loginController = async (req, res) => {
 };
 
 export const profileController = async (req, res) => {
-  res.json({ msg: 'Profile' });
+  const { veterinary } = req;
+
+  res.json({ veterinary });
+};
+
+export const forgotPasswordController = async (req, res) => {
+  const { email } = req.body;
+
+  const veterinaryExist = await Veterinary.findOne({ email });
+
+  if (!veterinaryExist) {
+    const error = new Error('Not Found Veterinary');
+    return res.status(400).json({ message: error.message });
+  }
+
+  try {
+    veterinaryExist.token = randomUUID();
+
+    await veterinaryExist.save();
+
+    res.json({
+      msg: 'Sent a message to your email with the account recovery instructions.',
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const confirmTokenController = async (req, res) => {
+  const { token } = req.params;
+
+  const validToken = await Veterinary.findOne({ token });
+
+  if (!validToken) {
+    const error = new Error('Not Valid Token!');
+    return res.status(400).json({ message: error.message });
+  }
+
+  res.json({ msg: 'Token valid, veterinary exist.' });
+};
+
+export const newPasswordController = async (req, res) => {
+  const { token } = req.params;
+  const { password } = req.body;
+
+  const veterinary = await Veterinary.findOne({ token });
+
+  if (!veterinary) {
+    const error = new Error('Not Found Veterinary');
+    return res.status(400).json({ message: error.message });
+  }
+
+  try {
+    veterinary.token = null;
+    veterinary.password = password;
+
+    await veterinary.save();
+
+    res.json({ msg: 'Password successfully changed' });
+  } catch (error) {
+    console.log(error);
+  }
 };

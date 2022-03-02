@@ -31,9 +31,4 @@ export const checkAuth = async (req, res, next) => {
 
     next();
   }
-
-  // const error = new Error('Invalid or missing Token');
-  // res.status(403).json({ msg: error.message });
-
-  next();
 };
