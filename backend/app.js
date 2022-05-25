@@ -10,6 +10,7 @@ connectDB();
 
 // Routes
 import veterinaryRoutes from './routes/veterinary.routes.js';
+import patientsRoutes from './routes/patient.routes.js';
 
 // Initializations
 export const app = express();
@@ -34,3 +35,4 @@ app.use(express.urlencoded({ extended: false }));
 
 // routes
 app.use('/api/veterinarians', veterinaryRoutes);
+app.use('/api/patients', patientsRoutes);
