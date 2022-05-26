@@ -43,23 +43,25 @@ export const ackController = async (req, res) => {
 };
 
 export const loginController = async (req, res) => {
-  const { email, password } = req.body;
+  try {
+    const { email, password } = req.body;
 
-  const userExists = await Veterinary.findOne({ email });
+    const userExists = await Veterinary.findOne({ email });
 
-  if (!userExists) return res.status(401).json({ msg: 'Unauthorized Veterinary.' });
+    if (!userExists) return res.status(401).json({ msg: 'Unauthorized Veterinary.' });
 
-  // Confirmed user?
-  if (!userExists.acknowledged) {
-    return res
-      .status(401)
-      .json({ msg: 'Unauthorized Veterinary. Please confirm your Acount,' });
+    // Confirmed user?
+    if (!userExists.acknowledged) {
+      return res
+        .status(401)
+        .json({ msg: 'Unauthorized Veterinary. Please confirm your Acount,' });
+    }
+
+    if (await userExists.checkPassword(password))
+      res.json({ token: generateJWT(userExists.id) });
+  } catch (error) {
+    res.status(403).json({ msg: 'Unauthorized Veterinary.' });
   }
-
-  if (await userExists.checkPassword(password))
-    res.json({ token: generateJWT(userExists.id) });
-
-  res.status(403).json({ msg: 'Unauthorized Veterinary.' });
 };
 
 export const profileController = async (req, res) => {

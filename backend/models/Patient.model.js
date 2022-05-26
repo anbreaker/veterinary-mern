@@ -10,18 +10,18 @@ const patientSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    petName: {
-      type: String,
-      required: true,
-    },
     email: {
       type: String,
       required: true,
-      unique: true,
       trim: true,
     },
     data: {
       type: Date,
+      required: true,
+      default: Date.now,
+    },
+    symptoms: {
+      type: String,
       required: true,
     },
     veterinary: {

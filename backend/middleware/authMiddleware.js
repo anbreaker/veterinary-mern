@@ -3,10 +3,10 @@ import jwt from 'jsonwebtoken';
 import { Veterinary } from '../models/Veterinary.model.js';
 
 export const checkAuth = async (req, res, next) => {
-  if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
-    let token;
+  let token;
 
-    try {
+  try {
+    if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
       token = req.headers.authorization.split(' ')[1];
 
       const decodeToken = jwt.verify(token, process.env.JWT_SECRET);
@@ -15,20 +15,20 @@ export const checkAuth = async (req, res, next) => {
         '-password -token -acknowledged -__v'
       );
 
-      // TODO delete this!
-      // console.log(req.veterinary);
+      if (!token) {
+        const error = new Error('Invalid or non-existent Token.');
+
+        return res.status(403).json({ msg: error.message });
+      }
 
       return next();
-    } catch (error) {
-      res.status(403).json({ msg: 'Invalid Token' });
-    }
-
-    if (!token) {
-      const error = new Error('Invalid or non-existent Token.');
+    } else {
+      const error = new Error('No Token provided.');
 
       return res.status(403).json({ msg: error.message });
     }
-
-    next();
+  } catch (error) {
+    console.log('eror de middleware');
+    res.status(403).json({ msg: 'Invalid Token' });
   }
 };
