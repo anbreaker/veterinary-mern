@@ -1,0 +1,384 @@
+{
+	"info": {
+		"_postman_id": "cb4d57d5-5b8b-4515-9f59-541eb25c8978",
+		"name": "veterinary-mern",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9865464"
+	},
+	"item": [
+		{
+			"name": "AckVeterinary",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/veterinarians/ack/036cb200-37d5-4414-92fa-f08c22dc0e80",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"veterinarians",
+						"ack",
+						"036cb200-37d5-4414-92fa-f08c22dc0e80"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Profile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/veterinarians/profile",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"veterinarians",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ValidateToken after ConfirmPassword",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/veterinarians/forgot-password/246b8c5d-f077-4cf8-bbaa-7c72a6f2243d",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"veterinarians",
+						"forgot-password",
+						"246b8c5d-f077-4cf8-bbaa-7c72a6f2243d"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all Patients",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/patients/getAllPatients",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"patients",
+						"getAllPatients"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Patient By Id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/patients/getPatient/628f4daafe81083b63894ad3",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"patients",
+						"getPatient",
+						"628f4daafe81083b63894ad3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"test@test.com\",\r\n    \"password\": \"test\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/veterinarians/login",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"veterinarians",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"anbreaker\",\r\n    \"email\": \"test@test.com\",\r\n    \"password\": \"test\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/veterinarians/register",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"veterinarians",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ResetPassword - ConfirmToken",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"test@test.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/veterinarians/forgot-password",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"veterinarians",
+						"forgot-password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Save New Password",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"password\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/veterinarians/forgot-password/246b8c5d-f077-4cf8-bbaa-7c72a6f2243d",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"veterinarians",
+						"forgot-password",
+						"246b8c5d-f077-4cf8-bbaa-7c72a6f2243d"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register Patients",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Deri&Tiva\",\r\n    \"owner\":\"anbreaker\",\r\n    \"email\":\"test2@test.com\",\r\n    \"symptoms\":\"bile pumps\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/patients/register",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"patients",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Patient",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Tiva\",\r\n    \"owner\": \"anbreaker\",\r\n    \"email\": \"test@test.com\",\r\n    \"symptoms\": \"bile pumps\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/patients//updatePatient/628f4daafe81083b63894ad3",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"patients",
+						"",
+						"updatePatient",
+						"628f4daafe81083b63894ad3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Patient",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/patients//deletePatient/628f4ebdfe81083b63894adc",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"patients",
+						"",
+						"deletePatient",
+						"628f4ebdfe81083b63894adc"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "http://localhost:3000/api"
+		}
+	]
+}
