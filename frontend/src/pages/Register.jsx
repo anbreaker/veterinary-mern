@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 import { Alert } from '../components/Alert';
 
@@ -33,6 +34,27 @@ export const Register = () => {
     }
 
     setAlert({});
+
+    createUser();
+  };
+
+  const createUser = async () => {
+    const url = 'http://localhost:4000/api/veterinarians/register';
+    try {
+      const response = await axios.post(url, { name, email, password });
+
+      setAlert({
+        msg: 'User created successfully, please check your email',
+        error: false,
+      });
+    } catch (error) {
+      console.error(error.response.data.msg);
+
+      setAlert({
+        msg: error.response.data.msg,
+        error: true,
+      });
+    }
   };
 
   const { msg } = alert;

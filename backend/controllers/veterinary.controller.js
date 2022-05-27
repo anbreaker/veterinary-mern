@@ -1,10 +1,11 @@
 import { randomUUID } from 'crypto';
 
+import { emailRegister } from '../helpers/emailRegister.js';
 import { generateJWT } from '../helpers/generateJWT.js';
 import { Veterinary } from '../models/Veterinary.model.js';
 
 export const registerController = async (req, res) => {
-  const { email } = req.body;
+  const { email, name } = req.body;
 
   const userExists = await Veterinary.findOne({ email });
 
@@ -15,6 +16,13 @@ export const registerController = async (req, res) => {
     const veterinary = new Veterinary(req.body);
 
     const newVeterinary = await veterinary.save();
+
+    // Send email
+    emailRegister({
+      name,
+      email,
+      token: newVeterinary.token,
+    });
 
     res.json({ msg: 'Register Veterinarian!', newVeterinary });
   } catch (error) {
