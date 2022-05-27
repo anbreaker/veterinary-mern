@@ -10,8 +10,8 @@ export const App = () => {
         <Route path="/" element={<AuthLayout />}>
           <Route index element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/confirmaccount" element={<ConfirmAccount />} />
-          <Route path="/forgotpassword/:id" element={<ForgotPassword />} />
+          <Route path="/confirm-account" element={<ConfirmAccount />} />
+          <Route path="/forgot-password/:id" element={<ForgotPassword />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -5,11 +5,12 @@ export const Login = () => {
     <>
       <div>
         <h1 className="text-indigo-200 font-black text-6xl">
-          Login and Manage yours <span className="text-orange-600">Patients</span>
+          Login and Manage yours {''}
+          <span className="text-orange-600">Patients</span>
         </h1>
       </div>
 
-      <div>
+      <div className="mt-20 md:mt-5 shadow-lg px-5 py-10 rounded-xl bg-cyan-900">
         <form action="">
           <div className="my-5">
             <label className="uppercase text-indigo-200 font-bold text-xl block">
@@ -40,10 +41,16 @@ export const Login = () => {
         </form>
 
         <nav className="mt-5 lg:flex lg:justify-between">
-          <Link className="block text-center my-5 text-gray-300" to="/register">
-            Don't have an account?
+          <Link
+            className="block text-center my-5 text-gray-300 hover:text-orange-600"
+            to="/register"
+          >
+            Don't have an account? Register here.
           </Link>
-          <Link className="block text-center my-5 text-gray-300" to="/register">
+          <Link
+            className="block text-center my-5 text-gray-300 hover:text-orange-600"
+            to="/forgot-password/:id"
+          >
             Forgot your password? Click here...
           </Link>
         </nav>
