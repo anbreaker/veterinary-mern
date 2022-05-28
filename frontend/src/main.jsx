@@ -4,7 +4,8 @@ import { App } from './App';
 import './styles/index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  // TODO add mode strict to up
+  // <React.StrictMode>
+  <App />
+  // </React.StrictMode>
 );

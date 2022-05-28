@@ -39,7 +39,7 @@ export const Register = () => {
   };
 
   const createUser = async () => {
-    const url = 'http://localhost:4000/api/veterinarians/register';
+    const url = `${import.meta.env.VITE_BACKEND_URL}/veterinarians/register`;
     try {
       const response = await axios.post(url, { name, email, password });
 

@@ -20,6 +20,7 @@ export const emailRegister = async (data) => {
     html: `<h2>Welcome ${name}</h2>
     <p>Please confirm your account Veterinary</p>
     <a href="${process.env.FRONTEND_URL}/ack/${token}">Confirm</a>
+    <p>Your token is <b>"${token}"</b></p>
     <p>If you did not request this, please ignore this email and your password will remain unchanged.</p>
     `,
   });
