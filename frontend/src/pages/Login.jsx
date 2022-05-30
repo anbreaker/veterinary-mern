@@ -3,11 +3,14 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { Alert } from '../components/Alert';
 import { axiosClient } from '../config/axios';
+import { useAuth } from '../hooks/useAuth';
 
 export const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [alert, setAlert] = useState({});
+
+  const { setAuth } = useAuth();
 
   const navigate = useNavigate();
 
@@ -28,7 +31,8 @@ export const Login = () => {
 
       localStorage.setItem('token', data.token);
 
-      // TODO crear admin
+      setAuth(data);
+
       navigate('/admin');
     } catch (error) {
       console.error(error.response.data.msg);

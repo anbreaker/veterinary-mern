@@ -8,12 +8,17 @@ export const AuthProvider = (props) => {
   const { children } = props;
 
   const [auth, setAuth] = useState({});
+  const [loadAuth, setLoadAuth] = useState(true);
 
   useEffect(() => {
     const authenticateUser = async () => {
       const token = localStorage.getItem('token');
 
-      if (!token) return;
+      if (!token) {
+        setLoadAuth(false);
+
+        return;
+      }
 
       try {
         const { data } = await axiosClient.get('/veterinarians/profile', {
@@ -29,9 +34,17 @@ export const AuthProvider = (props) => {
 
         setAuth({});
       }
+
+      setLoadAuth(false);
     };
     authenticateUser();
   }, []);
+
+  const logout = () => {
+    localStorage.removeItem('token');
+
+    setAuth({});
+  };
 
   return (
     <>
@@ -39,6 +52,8 @@ export const AuthProvider = (props) => {
         value={{
           auth,
           setAuth,
+          loadAuth,
+          logout,
         }}
       >
         {children}
