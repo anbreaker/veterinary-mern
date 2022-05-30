@@ -30,8 +30,8 @@ const corsOptions = {
   },
 };
 
-app.use(cors(corsOptions));
-// app.use(cors());
+// app.use(cors(corsOptions));
+app.use(cors());
 
 // Helmet can help protect your app from some well-known web vulnerabilities
 // by setting HTTP headers appropriately.

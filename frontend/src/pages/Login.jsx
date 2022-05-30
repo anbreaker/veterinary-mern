@@ -1,6 +1,46 @@
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+
+import { Alert } from '../components/Alert';
+import { axiosClient } from '../config/axios';
 
 export const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [alert, setAlert] = useState({});
+
+  const navigate = useNavigate();
+
+  const handelFormSubmit = async (event) => {
+    event.preventDefault();
+
+    if ([email, password].includes('')) {
+      setAlert({ msg: 'Please fill all the fields', error: true });
+
+      return;
+    }
+
+    try {
+      const { data } = await axiosClient.post('/veterinarians/login', {
+        email,
+        password,
+      });
+
+      localStorage.setItem('token', data.token);
+
+      // TODO crear admin
+      navigate('/admin');
+    } catch (error) {
+      console.error(error.response.data.msg);
+
+      setAlert({
+        msg: error.response.data.msg,
+        error: true,
+      });
+    }
+  };
+
+  const { msg } = alert;
   return (
     <>
       <div>
@@ -11,7 +51,9 @@ export const Login = () => {
       </div>
 
       <div className="mt-20 md:mt-5 shadow-lg px-5 py-10 rounded-xl bg-cyan-900">
-        <form action="">
+        {msg && <Alert alert={alert} />}
+
+        <form onSubmit={handelFormSubmit}>
           <div className="my-5">
             <label className="uppercase text-indigo-200 font-bold text-xl block">
               Email
@@ -20,6 +62,8 @@ export const Login = () => {
               className="border w-full p-3 mt-3 bg-gray-100 rounded-xl"
               type="email"
               placeholder="Enter your Email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
             />
           </div>
           <div className="my-5">
@@ -30,6 +74,8 @@ export const Login = () => {
               className="border w-full p-3 mt-3 bg-gray-100 rounded-xl"
               type="password"
               placeholder="Enter your Password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
             />
           </div>
 

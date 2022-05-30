@@ -47,7 +47,7 @@ export const ConfirmAccount = () => {
           <div>
             <Alert alert={alert} />
             <p className="text-center uppercase text-white d-flex">
-              Waiting for automatic redirect... <span class="loader"></span>
+              Waiting for automatic redirect... <span className="loader"></span>
             </p>
           </div>
         )}
