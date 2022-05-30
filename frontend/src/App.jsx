@@ -1,7 +1,13 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { AuthLayout } from './layout/AuthLayout';
-import { ConfirmAccount, ForgotPassword, Login, Register } from './pages/index';
+import {
+  ConfirmAccount,
+  ForgotPassword,
+  Login,
+  NewPassword,
+  Register,
+} from './pages/index';
 
 export const App = () => {
   return (
@@ -11,7 +17,8 @@ export const App = () => {
           <Route index element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/ack/:token" element={<ConfirmAccount />} />
-          <Route path="/forgot-password/:id" element={<ForgotPassword />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/forgot-password/:token" element={<NewPassword />} />
         </Route>
       </Routes>
     </BrowserRouter>

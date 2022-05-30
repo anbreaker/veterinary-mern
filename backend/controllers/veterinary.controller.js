@@ -2,6 +2,7 @@ import { randomUUID } from 'crypto';
 
 import { emailRegister } from '../helpers/emailRegister.js';
 import { generateJWT } from '../helpers/generateJWT.js';
+import { resetPassword } from '../helpers/resetPassword.js';
 import { Veterinary } from '../models/Veterinary.model.js';
 
 export const registerController = async (req, res) => {
@@ -85,13 +86,21 @@ export const forgotPasswordController = async (req, res) => {
 
   if (!veterinaryExist) {
     const error = new Error('Not Found Veterinary');
-    return res.status(400).json({ message: error.message });
+
+    return res.status(404).json({ msg: error.message });
   }
 
   try {
     veterinaryExist.token = randomUUID();
 
     await veterinaryExist.save();
+
+    // Send mail renew password
+    resetPassword({
+      email,
+      name: veterinaryExist.name,
+      token: veterinaryExist.token,
+    });
 
     res.json({
       msg: 'Sent a message to your email with the account recovery instructions.',

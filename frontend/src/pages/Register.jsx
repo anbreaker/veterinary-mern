@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 
 import { Alert } from '../components/Alert';
+import { axiosClient } from '../config/axios';
 
 export const Register = () => {
   const [name, setName] = useState('');
@@ -39,9 +39,9 @@ export const Register = () => {
   };
 
   const createUser = async () => {
-    const url = `${import.meta.env.VITE_BACKEND_URL}/veterinarians/register`;
+    const url = `/veterinarians/register`;
     try {
-      const response = await axios.post(url, { name, email, password });
+      const response = await axiosClient.post(url, { name, email, password });
 
       setAlert({
         msg: 'User created successfully, please check your email',

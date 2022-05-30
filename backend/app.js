@@ -18,7 +18,7 @@ export const app = express();
 // middlewares
 
 // comunications with other servers with configuration
-const allowedDomains = ['http://localhost:3000'];
+const allowedDomains = [process.env.FRONTEND_URL];
 
 const corsOptions = {
   origin: function (origin, callback) {
@@ -31,6 +31,7 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+// app.use(cors());
 
 // Helmet can help protect your app from some well-known web vulnerabilities
 // by setting HTTP headers appropriately.
