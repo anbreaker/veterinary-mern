@@ -66,8 +66,16 @@ export const loginController = async (req, res) => {
         .json({ msg: 'Unauthorized Veterinary. Please confirm your Acount,' });
     }
 
-    if (await userExists.checkPassword(password))
-      res.json({ token: generateJWT(userExists.id) });
+    if (await userExists.checkPassword(password)) {
+      const { _id, email, name } = userExists;
+
+      res.json({
+        _id,
+        name,
+        email,
+        token: generateJWT(userExists._id),
+      });
+    }
   } catch (error) {
     res.status(403).json({ msg: 'Unauthorized Veterinary.' });
   }
